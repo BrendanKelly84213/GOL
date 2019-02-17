@@ -36,10 +36,10 @@ void fillCell(int cellW, SDL_Surface* dest, int surface_x, int surface_y, Uint32
   }
 }
 
-void initGrid(bool** &grid, int cellW, int surface_w, int surface_h)
+Grid::Grid(int cellW, int surface_w, int surface_h)
 {
-  int grid_w = surface_w/cellW;
-  int grid_h = surface_h/cellW;
+  grid_w = surface_w/cellW;
+  grid_h = surface_h/cellW;
 
   grid = new bool*[grid_w];
 
@@ -59,10 +59,8 @@ void initGrid(bool** &grid, int cellW, int surface_w, int surface_h)
   }
 }
 
-void transform(int cellW, SDL_Surface* dest, int surface_w, int surface_h, bool** grid)
+void Grid::transform(SDL_Surface* dest)
 {
-  int grid_w = surface_w/cellW;
-  int grid_h = surface_h/cellW;
   bool state;
   Uint32 pixel;
 
@@ -76,7 +74,7 @@ void transform(int cellW, SDL_Surface* dest, int surface_w, int surface_h, bool*
 }
 
 
-void destroyGrid(bool** grid, int grid_w)
+Grid::~Grid()
 {
   for(int i =0; i < grid_w; i++){
     delete[] grid[i];
