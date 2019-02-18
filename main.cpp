@@ -20,9 +20,9 @@ int main()
 {
   //Initialize variables
   SDL_Init(SDL_INIT_VIDEO);
-  Window window= Window("window");
+  Window window= Window("window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOW_FULLSCREEN_DESKTOP);
   SDL_Surface* surface= window.get_surface();
-  Grid grid= Grid(5, window.getW(), window.getH());
+  Grid grid= Grid(2, window.getW(), window.getH());
   Timer* mTimer;
   SDL_Event event;
   bool running = true;
@@ -43,7 +43,7 @@ int main()
 
     while(SDL_PollEvent(&event))
     {
-      if(event.type == SDL_QUIT){
+      if(event.type == SDL_QUIT || event.type == SDL_KEYDOWN){
         running = false;
       }
     }
