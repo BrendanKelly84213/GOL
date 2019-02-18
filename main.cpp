@@ -3,16 +3,14 @@
 #include <cstdlib>
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
-#include <vector>
 #include <assert.h>
+
 #include "window.h"
 #include "grid.h"
-#include "GOL.h"
+
 
 const int WIDTH = 640;
 const int HEIGHT = 480;
-const int X_CELLS=120;
-const int y_CELLS=96;
 const unsigned int FPS = 60;
 
 
@@ -20,24 +18,16 @@ int main()
 {
   //Initialize variables
   bool running = true;
-  bool** Grid = NULL;
   SDL_Event event;
   SDL_Init(SDL_INIT_VIDEO);
-  int frameTime = 1;
   Window window = Window("window");
-
   SDL_Surface* surface = window.get_surface();
-
-  Uint32 pixel = setColor(true, surface);
-
-  fillCell(7, surface, WIDTH/2, HEIGHT/2, pixel);
-
-  initGrid(Grid, 7, WIDTH, HEIGHT);
-
-  transform(7, surface, WIDTH, HEIGHT, Grid);
-
-
-  window.Update();
+  Grid grid = Grid(5, window.getW(), window.getH());
+  
+  int glider[][2] = { {2,1}, {3,2}, {1,3}, {2,3}, {3,3} };
+  for(int i=0; i < 5; i++){
+    grid.setState(glider[i][0], glider[i][1], true);
+  }
 
   while(running)
   {
@@ -46,10 +36,15 @@ int main()
       if(event.type == SDL_QUIT){
         running = false;
       }
+      grid.Update();
+      grid.transform(surface);
+      window.Update();
+
+
     }
   }
 
-  destroyGrid(Grid, WIDTH/7);
+
   SDL_Quit();
 
   return 0;
