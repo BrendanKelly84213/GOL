@@ -8,11 +8,12 @@
 #include "Timer.h"
 #include "window.h"
 #include "grid.h"
+#include "DrawRect.h"
 
 
 const int WIDTH = 640;
 const int HEIGHT = 480;
-const unsigned int FPS = 60;
+const unsigned int FPS = 10;
 
 
 int main()
@@ -32,6 +33,9 @@ int main()
   for(int i=0; i < 5; i++){
     grid.setState(glider[i][0], glider[i][1], true);
   }
+
+  grid.draw_rectangle(grid.w()/4, grid.h()/4, grid.w()/2, grid.h()/2);
+  grid.draw_circle(grid.w()/2, grid.h()/2, 20);
 
   while(running)
   {

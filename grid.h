@@ -1,6 +1,8 @@
 #ifndef GRID_H
 #define GRID_H
 
+#include <SDL2/SDL.h>
+
 void set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
 
 Uint32 setColor(bool state, SDL_Surface* dest);
@@ -10,8 +12,8 @@ void fillCell(int XCells, SDL_Surface* dest, int surface_x, int surface_y, Uint3
 
 class Grid{
 private:
-  bool** grid=NULL;
   bool** buffer=NULL;
+  bool** grid=NULL;
   int grid_w=0;
   int grid_h=0;
   int XCells=0;
@@ -22,6 +24,15 @@ public:
   void setState(int x, int y, bool state);
   void transform(SDL_Surface* dest);
   void Update();
+
+  void draw_rectangle(
+  int x,
+  int y,
+  int rect_width,
+  int rect_height );
+
+  void draw_circle(  int x, int y, int r);
+
   int w();
   int h();
   int cellW();
