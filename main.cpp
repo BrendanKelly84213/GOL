@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 #include <assert.h>
 
+#include "Timer.h"
 #include "window.h"
 #include "grid.h"
 
@@ -17,13 +18,16 @@ const unsigned int FPS = 60;
 int main()
 {
   //Initialize variables
-  bool running = true;
-  SDL_Event event;
   SDL_Init(SDL_INIT_VIDEO);
-  Window window = Window("window");
-  SDL_Surface* surface = window.get_surface();
-  Grid grid = Grid(5, window.getW(), window.getH());
-  
+  Window window= Window("window");
+  SDL_Surface* surface= window.get_surface();
+  Grid grid= Grid(5, window.getW(), window.getH());
+  Timer* mTimer;
+  SDL_Event event;
+  bool running = true;
+  mTimer = Timer::Instance();
+
+
   int glider[][2] = { {2,1}, {3,2}, {1,3}, {2,3}, {3,3} };
   for(int i=0; i < 5; i++){
     grid.setState(glider[i][0], glider[i][1], true);
@@ -31,16 +35,18 @@ int main()
 
   while(running)
   {
+    mTimer->Update();
+
     while(SDL_PollEvent(&event))
     {
       if(event.type == SDL_QUIT){
         running = false;
       }
+    }
+    if(mTimer->deltaTime() >= 1.0f / FPS){
       grid.Update();
       grid.transform(surface);
       window.Update();
-
-
     }
   }
 
