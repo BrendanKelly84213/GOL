@@ -12,12 +12,11 @@ void set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
       *(Uint32 *)target_pixel = pixel;
 }
 
-Uint32 setColor(bool state, SDL_Surface* dest)
+Uint32 setColor(bool state, SDL_Surface* dest, Uint32 red, Uint32 green, Uint32 blue)
 {
   Uint32 pixel;
-  Uint32 white = SDL_MapRGB(dest->format, 255, 255, 255);
   Uint32 black = SDL_MapRGB(dest->format, 0, 0, 0);
-  Uint32 other = SDL_MapRGB(dest->format, 120,100,120);
+  Uint32 other = SDL_MapRGB(dest->format, red,green,blue);
   if(state==true){
     pixel = other;
   }
@@ -37,11 +36,14 @@ void fillCell(int XCells, SDL_Surface* dest, int surface_x, int surface_y, Uint3
 }
 
 
-Grid::Grid(int cellW, int surface_w, int surface_h)
+Grid::Grid(int cellW, int surface_w, int surface_h, Uint32 r, Uint32 g, Uint32 b)
 {
   grid_w = surface_w/cellW;
   grid_h = surface_h/cellW;
   XCells = cellW;
+  red = r;
+  green = g;
+  blue = b;
 
   grid = new bool*[grid_w];
   buffer = new bool*[grid_w];
@@ -73,7 +75,7 @@ void Grid::transform(SDL_Surface* dest)
   for(int i =0; i < grid_w; i++){
     for(int j= 0; j < grid_h; j++){
       state = grid[i][j];
-      pixel = setColor(state, dest);
+      pixel = setColor(state, dest, red, green, blue);
       fillCell(XCells, dest, i*XCells, j*XCells, pixel);
     }
   }

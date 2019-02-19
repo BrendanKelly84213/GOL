@@ -21,7 +21,7 @@ int main()
   SDL_Init(SDL_INIT_VIDEO);
   Window window= Window("window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOW_FULLSCREEN_DESKTOP);
   SDL_Surface* surface= window.get_surface();
-  Grid grid= Grid(2, window.getW(), window.getH());
+  Grid grid= Grid(2, window.getW(), window.getH(), 200, 50, 0);
   Timer* mTimer;
   SDL_Event event;
   bool running = true;
@@ -34,7 +34,11 @@ int main()
   }
 
 
-  grid.draw_rectangle(grid.w()/4, grid.h()/4, grid.w()/2, grid.h()/2);
+  grid.draw_rectangle(grid.w()/4, grid.h()/4, grid.w()/2, grid.h()/4);
+  grid.draw_rectangle(grid.w()/2, grid.h()/2, grid.w()/4, grid.h()/2);
+  grid.draw_rectangle(grid.w()/1.5, grid.h()/1.5, grid.w()/4, grid.h()/4);
+  grid.draw_rectangle(0, 0, grid.w()/4, grid.h()/4 );
+
 
   while(running)
   {
