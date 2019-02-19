@@ -21,7 +21,7 @@ int main()
   SDL_Init(SDL_INIT_VIDEO);
   Window window= Window("window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOW_FULLSCREEN_DESKTOP);
   SDL_Surface* surface= window.get_surface();
-  Grid grid= Grid(2, window.getW(), window.getH(), 200, 50, 0);
+  Grid grid= Grid(2, window.getW(), window.getH(), 255, 0, 0);
   Timer* mTimer;
   SDL_Event event;
   bool running = true;

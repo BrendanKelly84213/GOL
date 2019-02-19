@@ -21,7 +21,12 @@ protected:
   Uint32 green;
   Uint32 blue;
 public:
-  Grid(int cellW, int surface_w, int surface_h, Uint32 r, Uint32 g, Uint32 b);
+  Grid(int cellW,
+    int surface_w,
+    int surface_h,
+    Uint32 r=255,
+    Uint32 g=255,
+    Uint32 b=255);
   bool** getGrid();
   bool getState(int x, int y);
   void setState(int x, int y, bool state);
