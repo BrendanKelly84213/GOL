@@ -11,7 +11,7 @@ void fillCell(int XCells, SDL_Surface* dest, int surface_x, int surface_y, Uint3
 
 
 class Grid{
-private:
+protected:
   bool** buffer=NULL;
   bool** grid=NULL;
   int grid_w=0;
@@ -41,5 +41,6 @@ private:
     bool decideState(int x, int y);
     int adjacent(int x, int y);
 };
+
 
 #endif

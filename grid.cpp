@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstdlib>
-#include <GL/glew.h>
 #include <SDL2/SDL.h>
 
 #include "grid.h"
@@ -18,8 +17,9 @@ Uint32 setColor(bool state, SDL_Surface* dest)
   Uint32 pixel;
   Uint32 white = SDL_MapRGB(dest->format, 255, 255, 255);
   Uint32 black = SDL_MapRGB(dest->format, 0, 0, 0);
+  Uint32 other = SDL_MapRGB(dest->format, 120,100,120);
   if(state==true){
-    pixel = white;
+    pixel = other;
   }
   else{
     pixel = black;
@@ -42,6 +42,7 @@ Grid::Grid(int cellW, int surface_w, int surface_h)
   grid_w = surface_w/cellW;
   grid_h = surface_h/cellW;
   XCells = cellW;
+
   grid = new bool*[grid_w];
   buffer = new bool*[grid_w];
 

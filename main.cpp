@@ -1,7 +1,6 @@
  #include <iostream>
 #include <stdio.h>
 #include <cstdlib>
-#include <GL/glew.h>
 #include <SDL2/SDL.h>
 #include <assert.h>
 
@@ -34,8 +33,8 @@ int main()
     grid.setState(glider[i][0], glider[i][1], true);
   }
 
+
   grid.draw_rectangle(grid.w()/4, grid.h()/4, grid.w()/2, grid.h()/2);
-  grid.draw_circle(grid.w()/2, grid.h()/2, 20);
 
   while(running)
   {
