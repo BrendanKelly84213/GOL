@@ -7,7 +7,7 @@
 const int WINDOW_WIDTH  = 1920;
 const int WINDOW_HEIGHT = 1080;
 
-Window::Window(const char* title, int x, int y, Uint32 flags, int window_w, int window_h)
+Window::Window(const char* title, int x, int y, int window_w, int window_h, Uint32 flags )
 {
   if(flags==SDL_WINDOW_FULLSCREEN_DESKTOP || flags==SDL_WINDOW_FULLSCREEN){
     window_w = 1920;

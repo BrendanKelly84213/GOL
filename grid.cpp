@@ -173,3 +173,77 @@ Grid::~Grid()
   delete[] buffer;
   buffer = NULL;
 }
+
+//Drawing functions
+
+//Rectangle
+void Grid::draw_rectangle(
+        		         int x,
+        		         int y,
+        		         int rect_width,
+        		         int rect_height )
+{
+  int px, py;
+
+  if(rect_width > 0 && rect_height > 0)
+  {
+    for(px = x; px < x + rect_width; px++)
+    {
+      for(py = y; py < y + rect_height; py++)
+      {
+        if(px == x || py == y || px == (x + rect_width - 1) || py == (y + rect_height - 1))
+          setState(px,py,true);
+      }
+    }
+  }
+  if(rect_width < 0 && rect_height > 0)
+  {
+    for(px = x; px != x + rect_width; px--)
+    {
+      for(py = y; py < y + rect_height; py++)
+      {
+        if(px == x || py == y || px == (x + rect_width + 1) || py == (y + rect_height - 1))
+          setState(px,py,true);
+      }
+    }
+  }
+  if(rect_width > 0 && rect_height < 0)
+  {
+    for(px = x; px < x + rect_width; px++)
+    {
+      for(py = y; py != y + rect_height; py--)
+      {
+        if(px == x || py == y || px == (x + rect_width - 1) || py == (y + rect_height + 1))
+          setState(px,py,true);
+      }
+    }
+  }
+  if(rect_width < 0 && rect_height < 0)
+  {
+    for(px = x; px != x  + rect_width; px--)
+    {
+      for(py = y; py != y + rect_height; py--)
+      {
+        if(px == x || py == y || px == (x + rect_width + 1) || py == (y + rect_height + 1))
+          setState(px,py,true);
+      }
+    }
+  }
+}
+
+//Circle
+void Grid::draw_circle(  int x, int y, int r)
+{
+  for(int px=0; px<grid_w; px++)
+  {
+    for(int py=0; py<grid_h; py++)
+    {
+      double circle = sqrt((x-px)*(x-px)+(y-py)*(y-py));
+      if(round(circle) < r)
+      {
+        setState(px, py, true);
+      }
+    }
+  }
+}
+
